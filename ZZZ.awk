@@ -5,6 +5,7 @@ BEGIN {
 {
     if (PASS == 1) {
         top_words[NR-1] = $1  # Store each word in the 'words' array
+        printf "%s,", $1
     }
 
     if (PASS == 2) {
@@ -30,10 +31,10 @@ END {
 }
 
 function processRecord() {
+    print "" # print a newline before each paragraphs word frequencies
     for (idx in top_words) {
         printf "%d,", wordFreq[top_words[idx]]
     }
 
-    print "" # print a newline after each paragraphs word frequencies
     delete(wordFreq) # reset frequencies between paragraphs
 }
